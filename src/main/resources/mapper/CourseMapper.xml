@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.studentmanagementonlinesystem.mapper.CourseMapper">
+    <select id="findBySearch" resultType="Course">
+        select cid, cname, ccredit
+        from c
+        <where>
+            <if test="cid != null">
+                and cid = #{cid}
+            </if>
+            <if test="cname != null and cname != ''">
+                <choose>
+                    <when test="fuzzy != null and fuzzy == 1">
+                        and cname like concat('%', #{cname}, '%')
+                    </when>
+                    <otherwise>
+                        and cname = #{cname}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="lowBound != null">
+                and ccredit &gt;= #{lowBound}
+            </if>
+            <if test="highBound != null">
+                and ccredit &lt;= #{highBound}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertCourse">
+        insert into c (cid, cname, ccredit)
+        values (#{course.cid}, #{course.cname}, #{course.ccredit})
+    </insert>
+
+    <update id="updateById">
+        update c
+        <set>
+            <if test="course.cname != null and course.cname != ''">
+                cname = #{course.cname},
+            </if>
+            <if test="course.ccredit != null">
+                ccredit = #{course.ccredit},
+            </if>
+        </set>
+        where cid = #{course.cid}
+    </update>
+
+    <delete id="deleteById">
+        delete from c
+        where cid = #{cid}
+    </delete>
+</mapper>
