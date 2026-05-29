@@ -1,9 +1,13 @@
 <template>
-  <div id="app">
+  <div>
     <router-view></router-view>
   </div>
 </template>
 
 <script setup>
-defineOptions({ name: 'app' })
+defineOptions({ name: "setCourse" })
 </script>
+
+<style scoped>
+
+</style>
