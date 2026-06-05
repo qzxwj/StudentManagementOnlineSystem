@@ -14,10 +14,10 @@
 import { ref } from 'vue'
 
 const type = ref(sessionStorage.getItem('type'))
-const id = ref(type.value === 'teacher' ? sessionStorage.getItem('tid') : sessionStorage.getItem('sid'))
+const id = ref(
+  type.value === 'teacher' ? sessionStorage.getItem('tid') : sessionStorage.getItem('sid'),
+)
 const name = ref(sessionStorage.getItem('name'))
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -3,9 +3,7 @@
 </template>
 
 <script setup>
-defineOptions({ name: "index" })
+defineOptions({ name: 'index' })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

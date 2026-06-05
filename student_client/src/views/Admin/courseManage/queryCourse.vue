@@ -2,8 +2,15 @@
   <div>
     <el-container>
       <el-main>
-        <el-card>
-          <el-form :inline="true" :model="ruleForm" :rules="rules" ref="ruleFormRef" label-width="120px" class="demo-ruleForm">
+        <el-card class="app-query-card">
+          <el-form
+            :inline="true"
+            :model="ruleForm"
+            :rules="rules"
+            ref="ruleFormRef"
+            label-width="120px"
+            class="demo-ruleForm"
+          >
             <el-form-item label="Course ID" prop="cid">
               <el-input v-model.number="ruleForm.cid"></el-input>
             </el-form-item>
@@ -34,36 +41,29 @@
 <script setup>
 import { reactive, ref, toRefs } from 'vue'
 
-import CourseList from "@/views/Admin/courseManage/courseList.vue";
+import CourseList from '@/views/Admin/courseManage/courseList.vue'
 
 const ruleFormRef = ref(null)
 
 const state = reactive({
-      ruleForm: {
-        cid: null,
-        cname: null,
-        fuzzy: true,
-        lowBound: null,
-        highBound: null
-      },
-      rules: {
-        cid: [
-          { type: 'number', message: 'Must be a number' }
-        ],
-        cname: [
-        ],
-        lowBound: [
-          { type: 'number', message: 'Must be a number' }
-        ],
-        highBound: [
-          { type: 'number', message: 'Must be a number' }
-        ],
-      }
-    })
+  ruleForm: {
+    cid: null,
+    cname: null,
+    fuzzy: true,
+    lowBound: null,
+    highBound: null,
+  },
+  rules: {
+    cid: [{ type: 'number', message: 'Must be a number' }],
+    cname: [],
+    lowBound: [{ type: 'number', message: 'Must be a number' }],
+    highBound: [{ type: 'number', message: 'Must be a number' }],
+  },
+})
 
 const { ruleForm, rules } = toRefs(state)
 
 function resetForm(formName) {
-ruleFormRef.value.resetFields();
+  ruleFormRef.value.resetFields()
 }
 </script>

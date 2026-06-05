@@ -3,9 +3,7 @@
 </template>
 
 <script setup>
-defineOptions({ name: "index.vue" })
+defineOptions({ name: 'index.vue' })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

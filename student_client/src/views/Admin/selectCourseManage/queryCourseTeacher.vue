@@ -2,8 +2,15 @@
   <div>
     <el-container>
       <el-main>
-        <el-card>
-          <el-form :inline="true" :model="ruleForm" :rules="rules" ref="ruleFormRef" label-width="150px" class="demo-ruleForm">
+        <el-card class="app-query-card">
+          <el-form
+            :inline="true"
+            :model="ruleForm"
+            :rules="rules"
+            ref="ruleFormRef"
+            label-width="150px"
+            class="demo-ruleForm"
+          >
             <el-form-item label="Teacher ID" prop="tid">
               <el-input v-model.number="ruleForm.tid"></el-input>
             </el-form-item>
@@ -27,7 +34,7 @@
             </el-form-item>
           </el-form>
         </el-card>
-        <el-card style="margin-top: 10px">
+        <el-card class="app-result-card">
           <course-tacher-list :ruleForm="ruleForm"></course-tacher-list>
         </el-card>
       </el-main>
@@ -37,32 +44,28 @@
 <script setup>
 import { reactive, ref, toRefs } from 'vue'
 
-import CourseTacherList from "@/views/Admin/selectCourseManage/CourseTacherList.vue";
+import CourseTacherList from '@/views/Admin/selectCourseManage/CourseTacherList.vue'
 
 const ruleFormRef = ref(null)
 
 const state = reactive({
-      ruleForm: {
-        tid: null,
-        cid: null,
-        cname: null,
-        tname: null,
-        tFuzzy: true,
-        cFuzzy: true
-      },
-      rules: {
-        tid: [
-          { type: 'number', message: 'Must be a number' }
-        ],
-        cid: [
-          { type: 'number', message: 'Must be a number' }
-        ],
-      }
-    })
+  ruleForm: {
+    tid: null,
+    cid: null,
+    cname: null,
+    tname: null,
+    tFuzzy: true,
+    cFuzzy: true,
+  },
+  rules: {
+    tid: [{ type: 'number', message: 'Must be a number' }],
+    cid: [{ type: 'number', message: 'Must be a number' }],
+  },
+})
 
 const { ruleForm, rules } = toRefs(state)
 
 function resetForm(formName) {
-ruleFormRef.value.resetFields();
+  ruleFormRef.value.resetFields()
 }
 </script>

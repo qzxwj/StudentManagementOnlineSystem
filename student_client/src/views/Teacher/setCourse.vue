@@ -5,9 +5,7 @@
 </template>
 
 <script setup>
-defineOptions({ name: "setCourse" })
+defineOptions({ name: 'setCourse' })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

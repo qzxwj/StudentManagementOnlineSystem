@@ -1,4 +1,4 @@
-﻿# StudentManageOnlineSystem
+﻿# StudentManagementOnlineSystem
 
 ## Environment Requirements
 
@@ -158,7 +158,7 @@ CREATE TABLE `sct` (
 );
 ```
 
-<img src="README.assets/image-20260528.png" alt="image-20260528" style="zoom:50%;" />
+<img src="README.assets/StudentManagementER.jpg" alt="image-20260528" style="zoom:50%;" />
 
 Test data SQL for the `studentms` database.
 

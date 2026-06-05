@@ -2,8 +2,15 @@
   <div>
     <el-container>
       <el-main>
-        <el-card>
-          <el-form :inline="true" :model="ruleForm" :rules="rules" ref="ruleFormRef" label-width="100px" class="demo-ruleForm">
+        <el-card class="app-query-card">
+          <el-form
+            :inline="true"
+            :model="ruleForm"
+            :rules="rules"
+            ref="ruleFormRef"
+            label-width="100px"
+            class="demo-ruleForm"
+          >
             <el-form-item label="Student ID" prop="sid">
               <el-input v-model.number="ruleForm.sid"></el-input>
             </el-form-item>
@@ -35,56 +42,51 @@ const router = useRouter()
 const ruleFormRef = ref(null)
 
 const state = reactive({
-      ruleForm: {
-        sid: null,
-        sname: null,
-        password: true
-      },
-      rules: {
-        sid: [
-          { type: 'number', message: 'Must be a number' }
-        ],
-        sname: [
-
-        ],
-      }
-    })
+  ruleForm: {
+    sid: null,
+    sname: null,
+    password: true,
+  },
+  rules: {
+    sid: [{ type: 'number', message: 'Must be a number' }],
+    sname: [],
+  },
+})
 
 const { ruleForm, rules } = toRefs(state)
 
 function flush(formName) {
-router.push('/queryStudent');
-      ruleFormRef.value.resetFields();
+  router.push('/queryStudent')
+  ruleFormRef.value.resetFields()
 }
 
 function submitForm(formName) {
-ruleFormRef.value.validate((valid) => {
-        if (valid) {
-          if (state.ruleForm.password === true) {
-            state.ruleForm.password = 'fuzzy'
-          }
-          else {
-            state.ruleForm.password = null
-          }
-          let url = null
-          if (state.ruleForm.sid === null && state.ruleForm.sname === null) {
-            url = '/studentList'
-          }
-          else {
-            url = '/queryStudent/studentList'
-          }
-          router.push({
-            path: url,
-            query: {
-              ruleForm: state.ruleForm
-            }})
-        } else {
-          return false;
-        }
-      });
+  ruleFormRef.value.validate((valid) => {
+    if (valid) {
+      if (state.ruleForm.password === true) {
+        state.ruleForm.password = 'fuzzy'
+      } else {
+        state.ruleForm.password = null
+      }
+      let url = null
+      if (state.ruleForm.sid === null && state.ruleForm.sname === null) {
+        url = '/studentList'
+      } else {
+        url = '/queryStudent/studentList'
+      }
+      router.push({
+        path: url,
+        query: {
+          ruleForm: state.ruleForm,
+        },
+      })
+    } else {
+      return false
+    }
+  })
 }
 
 function resetForm(formName) {
-ruleFormRef.value.resetFields();
+  ruleFormRef.value.resetFields()
 }
 </script>

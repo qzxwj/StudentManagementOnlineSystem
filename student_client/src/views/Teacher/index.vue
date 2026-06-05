@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="app-shell">
     <el-container>
-      <el-header style="text-align: right; font-size: 18px; background-color: #409EFF; border-radius: 3px">
+      <el-header class="app-topbar">
         <r-header></r-header>
       </el-header>
-      <el-container>
+      <el-container class="app-body">
         <r-aside></r-aside>
-        <el-main>
+        <el-main class="app-main">
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -15,13 +15,11 @@
 </template>
 
 <script setup>
-import RAside from "@/components/r-aside.vue";
+import RAside from '@/components/r-aside.vue'
 
-import RHeader from "@/components/r-header.vue";
+import RHeader from '@/components/r-header.vue'
 
-defineOptions({ name: "index" })
+defineOptions({ name: 'index' })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

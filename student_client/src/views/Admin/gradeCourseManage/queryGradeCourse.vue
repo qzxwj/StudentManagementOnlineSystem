@@ -2,8 +2,15 @@
   <div>
     <el-container>
       <el-main>
-        <el-card>
-          <el-form :inline="true" :model="ruleForm" :rules="rules" ref="ruleFormRef" label-width="120px" class="demo-ruleForm">
+        <el-card class="app-query-card">
+          <el-form
+            :inline="true"
+            :model="ruleForm"
+            :rules="rules"
+            ref="ruleFormRef"
+            label-width="120px"
+            class="demo-ruleForm"
+          >
             <el-form-item label="Student ID" prop="sid">
               <el-input v-model.number="ruleForm.sid"></el-input>
             </el-form-item>
@@ -39,7 +46,12 @@
             </el-form-item>
             <el-form-item label="SelectTerm">
               <el-select v-model="ruleForm.term" placeholder="Please select a term">
-                <el-option v-for="(item, index) in termList" :key="index" :label="item" :value="item"></el-option>
+                <el-option
+                  v-for="(item, index) in termList"
+                  :key="index"
+                  :label="item"
+                  :value="item"
+                ></el-option>
               </el-select>
             </el-form-item>
             <el-form-item>
@@ -47,7 +59,7 @@
             </el-form-item>
           </el-form>
         </el-card>
-        <el-card style="margin-top: 10px">
+        <el-card class="app-result-card">
           <grade-course-list :rule-form="ruleForm"></grade-course-list>
         </el-card>
       </el-main>
@@ -57,54 +69,43 @@
 <script setup>
 import { reactive, ref, toRefs } from 'vue'
 
-import GradeCourseList from "@/views/Admin/gradeCourseManage/gradeCourseList.vue";
+import GradeCourseList from '@/views/Admin/gradeCourseManage/gradeCourseList.vue'
 
 const ruleFormRef = ref(null)
 
 const state = reactive({
-      termList: null,
-      ruleForm: {
-        sid: null,
-        sname: null,
-        sFuzzy: true,
-        tid: null,
-        tname: null,
-        tFuzzy: true,
-        cid: null,
-        cname: null,
-        cFuzzy: true,
-        lowBound: null,
-        highBound: null,
-        term: sessionStorage.getItem('currentTerm')
-      },
-      rules: {
-        cid: [
-          { type: 'number', message: 'Must be a number' }
-        ],
-        tid: [
-          { type: 'number', message: 'Must be a number' }
-        ],
-        sid: [
-          { type: 'number', message: 'Must be a number' }
-        ],
-        cname: [
-        ],
-        lowBound: [
-          { type: 'number', message: 'Must be a number' }
-        ],
-        highBound: [
-          { type: 'number', message: 'Must be a number' }
-        ],
-      }
-    })
+  termList: null,
+  ruleForm: {
+    sid: null,
+    sname: null,
+    sFuzzy: true,
+    tid: null,
+    tname: null,
+    tFuzzy: true,
+    cid: null,
+    cname: null,
+    cFuzzy: true,
+    lowBound: null,
+    highBound: null,
+    term: sessionStorage.getItem('currentTerm'),
+  },
+  rules: {
+    cid: [{ type: 'number', message: 'Must be a number' }],
+    tid: [{ type: 'number', message: 'Must be a number' }],
+    sid: [{ type: 'number', message: 'Must be a number' }],
+    cname: [],
+    lowBound: [{ type: 'number', message: 'Must be a number' }],
+    highBound: [{ type: 'number', message: 'Must be a number' }],
+  },
+})
 
 const { termList, ruleForm, rules } = toRefs(state)
 
 axios.get('/SCT/findAllTerm').then(function (resp) {
-      state.termList = resp.data
-    })
+  state.termList = resp.data
+})
 
 function resetForm(formName) {
-ruleFormRef.value.resetFields();
+  ruleFormRef.value.resetFields()
 }
 </script>

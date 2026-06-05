@@ -1,7 +1,13 @@
 <template>
   <div>
     <el-card>
-      <el-form style="width: 60%" :model="ruleForm" :rules="rules" ref="ruleFormRef" label-width="100px" class="demo-ruleForm">
+      <el-form
+        :model="ruleForm"
+        :rules="rules"
+        ref="ruleFormRef"
+        label-width="100px"
+        class="demo-ruleForm"
+      >
         <el-form-item label="Course Name" prop="cname">
           <el-input v-model="ruleForm.cname" :value="ruleForm.cname" :disabled="true"></el-input>
         </el-form-item>
@@ -17,7 +23,6 @@
         <el-form-item>
           <el-button type="primary" @click="submitForm">Submit</el-button>
           <el-button @click="resetForm">Reset</el-button>
-          <el-button @click="test">test</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -34,18 +39,18 @@ const ruleFormRef = ref(null)
 
 const checkGrade = (rule, value, callback) => {
   if (!value) {
-    return callback(new Error('Grade Management'));
+    return callback(new Error('Grade Management'))
   }
   if (!Number.isInteger(value)) {
-    callback(new Error('Please enter a numeric value'));
+    callback(new Error('Please enter a numeric value'))
   } else {
     if (value > 100 || value < 0) {
-      callback(new Error('Grade Management [0 - 100]'));
+      callback(new Error('Grade Management [0 - 100]'))
     } else {
-      callback();
+      callback()
     }
   }
-};
+}
 
 const ruleForm = reactive({
   cid: null,
@@ -60,9 +65,9 @@ const ruleForm = reactive({
 
 const rules = reactive({
   grade: [
-    { required: true, message: 'Please enterCredits', trigger: 'change'},
-    { type: 'number', message: 'Please enter a number', trigger: 'change'},
-    { validator: checkGrade, trigger: 'blur'}
+    { required: true, message: 'Please enterCredits', trigger: 'change' },
+    { type: 'number', message: 'Please enter a number', trigger: 'change' },
+    { validator: checkGrade, trigger: 'blur' },
   ],
 })
 
@@ -70,13 +75,13 @@ ruleForm.cid = route.query.cid
 ruleForm.tid = route.query.tid
 ruleForm.sid = route.query.sid
 ruleForm.term = route.query.term
-axios.get('/SCT/findById/' +
-    ruleForm.sid + '/' +
-    ruleForm.cid + '/' +
-    ruleForm.tid + '/' +
-    ruleForm.term).then(function (resp) {
-  Object.assign(ruleForm, resp.data)
-})
+axios
+  .get(
+    '/SCT/findById/' + ruleForm.sid + '/' + ruleForm.cid + '/' + ruleForm.tid + '/' + ruleForm.term,
+  )
+  .then(function (resp) {
+    Object.assign(ruleForm, resp.data)
+  })
 
 function submitForm() {
   ruleFormRef.value.validate((valid) => {
@@ -87,33 +92,31 @@ function submitForm() {
       const tid = ruleForm.tid
       const term = ruleForm.term
       const grade = ruleForm.grade
-      axios.get("/SCT/updateById/" + sid + '/' + cid + '/' + tid + '/' + term + '/' + grade).then(function (resp) {
-        if (resp.data === true) {
-          proxy.$message({
-            showClose: true,
-            message: 'Edit',
-            type: 'success'
-          });
-        }
-        else {
-          proxy.$message.error('Edit,Management');
-        }
-        if (sessionStorage.getItem('type') === 'admin') {
-          router.push("/queryGradeCourse")
-        } else {
-          router.push("/teacherQueryGradeCourseManage")
-        }
-      })
+      axios
+        .get('/SCT/updateById/' + sid + '/' + cid + '/' + tid + '/' + term + '/' + grade)
+        .then(function (resp) {
+          if (resp.data === true) {
+            proxy.$message({
+              showClose: true,
+              message: 'Edit',
+              type: 'success',
+            })
+          } else {
+            proxy.$message.error('Edit,Management')
+          }
+          if (sessionStorage.getItem('type') === 'admin') {
+            router.push('/queryGradeCourse')
+          } else {
+            router.push('/teacherQueryGradeCourseManage')
+          }
+        })
     } else {
-      return false;
+      return false
     }
-  });
+  })
 }
 
 function resetForm() {
-  ruleFormRef.value.resetFields();
-}
-
-function test() {
+  ruleFormRef.value.resetFields()
 }
 </script>

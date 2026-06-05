@@ -2,7 +2,14 @@
   <el-container>
     <el-main>
       <el-card>
-        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleFormRef" label-width="100px" class="demo-ruleForm">
+        <el-form
+          :model="ruleForm"
+          status-icon
+          :rules="rules"
+          ref="ruleFormRef"
+          label-width="100px"
+          class="demo-ruleForm"
+        >
           <el-form-item label="Name" prop="name">
             <el-input v-model.name="ruleForm.name" :value="ruleForm.name"></el-input>
           </el-form-item>
@@ -32,40 +39,34 @@ const { proxy } = getCurrentInstance()
 const ruleForm = reactive({
   pass: '',
   checkPass: '',
-  name: sessionStorage.getItem('name')
+  name: sessionStorage.getItem('name'),
 })
 
 const validatePass = (rule, value, callback) => {
   if (value === '') {
-    callback(new Error('Please enterPassword'));
+    callback(new Error('Please enterPassword'))
   } else {
     if (ruleForm.checkPass !== '') {
-      ruleFormRef.value.validateField('checkPass');
+      ruleFormRef.value.validateField('checkPass')
     }
-    callback();
+    callback()
   }
-};
+}
 
 const validatePass2 = (rule, value, callback) => {
   if (value === '') {
-    callback(new Error('Password'));
+    callback(new Error('Password'))
   } else if (value !== ruleForm.pass) {
-    callback(new Error('Password error!'));
+    callback(new Error('Password error!'))
   } else {
-    callback();
+    callback()
   }
-};
+}
 
 const rules = reactive({
-  pass: [
-    { validator: validatePass, trigger: 'blur' }
-  ],
-  checkPass: [
-    { validator: validatePass2, trigger: 'blur' }
-  ],
-  name: [
-    { require: true, message: 'Name cannot be empty', trigger: 'blur'}
-  ]
+  pass: [{ validator: validatePass, trigger: 'blur' }],
+  checkPass: [{ validator: validatePass2, trigger: 'blur' }],
+  name: [{ require: true, message: 'Name cannot be empty', trigger: 'blur' }],
 })
 
 function submitForm() {
@@ -82,8 +83,7 @@ function submitForm() {
           sname: ruleForm.name,
           password: ruleForm.pass,
         }
-      }
-      else {
+      } else {
         ss = 'Teacher'
         form = {
           tid: sessionStorage.getItem('tid'),
@@ -97,21 +97,20 @@ function submitForm() {
           proxy.$message({
             showClose: true,
             message: 'Edit',
-            type: 'success'
-          });
+            type: 'success',
+          })
+        } else {
+          proxy.$message.error('Edit,Contact the administrator')
         }
-        else {
-          proxy.$message.error('Edit,Contact the administrator');
-        }
-        router.push("/" + type + 'Home')
+        router.push('/' + type + 'Home')
       })
     } else {
-      return false;
+      return false
     }
-  });
+  })
 }
 
 function resetForm() {
-  ruleFormRef.value.resetFields();
+  ruleFormRef.value.resetFields()
 }
 </script>
