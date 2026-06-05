@@ -1,4 +1,10 @@
-﻿## Environment Requirements
+﻿# StudentManageOnlineSystem
+
+## Environment Requirements
+
+This is a separated frontend and backend student management project. The frontend is built with Vue, and the backend is built with SpringBoot and MyBatis.
+
+<img src="README.assets/image-20260605.png" alt="image-20260605" style="zoom:50%;" />
 
 Install the following software before running this project:
 
@@ -151,6 +157,8 @@ CREATE TABLE `sct` (
     PRIMARY KEY (`sctid`)
 );
 ```
+
+<img src="README.assets/image-20260528.png" alt="image-20260528" style="zoom:50%;" />
 
 Test data SQL for the `studentms` database.
 

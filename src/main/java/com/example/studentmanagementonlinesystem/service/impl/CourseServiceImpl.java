@@ -26,22 +26,19 @@ public class CourseServiceImpl implements CourseService {
         if (map.containsKey("cid")) {
             try {
                 cid = Integer.parseInt(map.get("cid"));
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
             }
         }
         if (map.containsKey("lowBound")) {
             try {
                 lowBound = Integer.parseInt(map.get("lowBound"));
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
             }
         }
         if (map.containsKey("highBound")) {
             try {
                 highBound = Integer.valueOf(map.get("highBound"));
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
             }
         }
         if (map.containsKey("cname")) {
