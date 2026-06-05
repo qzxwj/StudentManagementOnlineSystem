@@ -2,9 +2,11 @@ package com.example.studentmanagementonlinesystem.service.impl;
 
 import com.example.studentmanagementonlinesystem.entity.Student;
 import com.example.studentmanagementonlinesystem.mapper.StudentMapper;
+import com.example.studentmanagementonlinesystem.mapper.StudentCourseTeacherMapper;
 import com.example.studentmanagementonlinesystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,9 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
+
+    @Autowired
+    private StudentCourseTeacherMapper studentCourseTeacherMapper;
 
     @Override
     public List<Student> findByPage(Integer num, Integer size) {
@@ -70,7 +75,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    @Transactional
     public boolean deleteById(Integer sid) {
+        studentCourseTeacherMapper.deleteBySid(sid);
         return studentMapper.deleteById(sid);
     }
 }
