@@ -53,8 +53,13 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
+    public Teacher register(Teacher teacher) {
+        teacher.setTid(null);
+        return teacherMapper.register(teacher) ? teacher : null;
+    }
+
+    @Override
     public boolean deleteById(Integer tid) {
         return teacherMapper.deleteById(tid);
     }
 }
-

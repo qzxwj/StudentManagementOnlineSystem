@@ -19,5 +19,7 @@ public interface TeacherMapper {
 
     boolean save(@Param("teacher") Teacher teacher);
 
+    boolean register(@Param("teacher") Teacher teacher);
+
     boolean deleteById(@Param("tid") Integer tid);
 }

@@ -17,5 +17,7 @@ public interface StudentService {
 
     boolean save(Student student);
 
+    Student register(Student student);
+
     boolean deleteById(Integer sid);
 }

@@ -58,6 +58,11 @@
         values (#{student.sid}, #{student.sname}, #{student.password})
     </insert>
 
+    <insert id="register" useGeneratedKeys="true" keyProperty="student.sid">
+        insert into s (sname, password)
+        values (#{student.sname}, #{student.password})
+    </insert>
+
     <delete id="deleteById">
         delete from s
         where sid = #{sid}

@@ -64,8 +64,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student register(Student student) {
+        student.setSid(null);
+        return studentMapper.register(student) ? student : null;
+    }
+
+    @Override
     public boolean deleteById(Integer sid) {
         return studentMapper.deleteById(sid);
     }
 }
-

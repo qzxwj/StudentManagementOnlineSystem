@@ -49,6 +49,11 @@
                 <el-button @click="resetForm">Reset</el-button>
               </el-form-item>
             </el-form>
+            <div class="register-actions">
+              <el-button text @click="goRegister('student')">Student Register</el-button>
+              <el-divider direction="vertical"></el-divider>
+              <el-button text @click="goRegister('teacher')">Teacher Register</el-button>
+            </div>
           </div>
         </el-card>
       </el-main>
@@ -187,6 +192,10 @@ function submitForm(formName) {
 function resetForm(formName) {
   ruleFormRef.value.resetFields()
 }
+
+function goRegister(type) {
+  router.push(type === 'teacher' ? '/teacherRegister' : '/studentRegister')
+}
 </script>
 
 <style scoped>
@@ -258,6 +267,15 @@ function resetForm(formName) {
 
 .login-module :deep(.el-form) {
   max-width: none;
+}
+
+.register-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--sms-hairline);
 }
 
 @media (max-width: 560px) {

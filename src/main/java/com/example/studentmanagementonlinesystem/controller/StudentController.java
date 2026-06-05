@@ -1,5 +1,6 @@
 package com.example.studentmanagementonlinesystem.controller;
 
+import com.example.studentmanagementonlinesystem.dto.RegisterResponse;
 import com.example.studentmanagementonlinesystem.entity.Student;
 import com.example.studentmanagementonlinesystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,25 @@ public class StudentController {
     public boolean addStudent(@RequestBody Student student) {
         System.out.println("Saving student: " + student);
         return studentService.save(student);
+    }
+
+    @PostMapping("/register")
+    public RegisterResponse register(@RequestBody Student student) {
+        if (student == null || isBlank(student.getSname()) || isBlank(student.getPassword())) {
+            return new RegisterResponse(null, null, "student", "Student name and password are required");
+        }
+
+        Student registeredStudent = studentService.register(student);
+        if (registeredStudent == null || registeredStudent.getSid() == null) {
+            return new RegisterResponse(null, student.getSname(), "student", "Student registration failed");
+        }
+
+        return new RegisterResponse(
+                registeredStudent.getSid(),
+                registeredStudent.getSname(),
+                "student",
+                "Student registration successful"
+        );
     }
 
     @PostMapping("/login")
@@ -65,5 +85,9 @@ public class StudentController {
     public boolean updateStudent(@RequestBody Student student) {
         System.out.println("Updating student: " + student);
         return studentService.updateById(student);
+    }
+
+    private boolean isBlank(String value) {
+        return value == null || value.trim().isEmpty();
     }
 }

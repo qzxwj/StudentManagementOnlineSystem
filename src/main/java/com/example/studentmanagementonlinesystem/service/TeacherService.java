@@ -14,5 +14,7 @@ public interface TeacherService {
 
     boolean save(Teacher teacher);
 
+    Teacher register(Teacher teacher);
+
     boolean deleteById(Integer tid);
 }

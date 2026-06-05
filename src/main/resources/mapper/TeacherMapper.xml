@@ -53,6 +53,11 @@
         values (#{teacher.tid}, #{teacher.tname}, #{teacher.password})
     </insert>
 
+    <insert id="register" useGeneratedKeys="true" keyProperty="teacher.tid">
+        insert into t (tname, password)
+        values (#{teacher.tname}, #{teacher.password})
+    </insert>
+
     <delete id="deleteById">
         delete from t
         where tid = #{tid}

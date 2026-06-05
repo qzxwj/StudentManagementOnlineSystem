@@ -19,5 +19,7 @@ public interface StudentMapper {
 
     boolean save(@Param("student") Student student);
 
+    boolean register(@Param("student") Student student);
+
     boolean deleteById(@Param("sid") Integer sid);
 }

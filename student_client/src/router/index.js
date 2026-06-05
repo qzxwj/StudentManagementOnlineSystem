@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import login from '../views/login/index.vue'
+import register from '@/views/register/index.vue'
 import admin from '../views/Admin/index.vue'
 import adminHome from '../views/Admin/home.vue'
 import studentManage from '../views/Admin/studentManage/index.vue'
@@ -50,6 +51,18 @@ const routes = [
     path: '/login',
     name: 'login',
     component: login,
+  },
+  {
+    path: '/studentRegister',
+    name: 'studentRegister',
+    component: register,
+    meta: { registerType: 'student' },
+  },
+  {
+    path: '/teacherRegister',
+    name: 'teacherRegister',
+    component: register,
+    meta: { registerType: 'teacher' },
   },
   {
     // Admin routes
