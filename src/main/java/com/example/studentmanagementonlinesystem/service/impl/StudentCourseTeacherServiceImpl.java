@@ -68,7 +68,7 @@ public class StudentCourseTeacherServiceImpl implements StudentCourseTeacherServ
     @Override
     public List<StudentCourseTeacherInfo> findBySearch(Map<String, String> map) {
         Integer sid = null, cid = null, tid = null;
-        String sname = null, cname = null, tname = null;
+        String sname = null, cname = null, tname = null, term = null;
         Integer sFuzzy = null, cFuzzy = null, tFuzzy = null;
         Integer lowBound = null, highBound = null;
 
@@ -102,6 +102,9 @@ public class StudentCourseTeacherServiceImpl implements StudentCourseTeacherServ
         if (map.containsKey("cname")) {
             cname = map.get("cname");
         }
+        if (map.containsKey("term")) {
+            term = map.get("term");
+        }
         if (map.containsKey("sFuzzy")) {
             sFuzzy = map.get("sFuzzy").equals("true") ? 1 : 0;
         }
@@ -131,6 +134,6 @@ public class StudentCourseTeacherServiceImpl implements StudentCourseTeacherServ
                 sid, sname, sFuzzy,
                 cid, cname, cFuzzy,
                 tid, tname, tFuzzy,
-                lowBound, highBound, null);
+                lowBound, highBound, term);
     }
 }

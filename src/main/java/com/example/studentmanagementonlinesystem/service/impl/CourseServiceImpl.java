@@ -1,10 +1,13 @@
 package com.example.studentmanagementonlinesystem.service.impl;
 
 import com.example.studentmanagementonlinesystem.entity.Course;
+import com.example.studentmanagementonlinesystem.mapper.CourseTeacherMapper;
 import com.example.studentmanagementonlinesystem.mapper.CourseMapper;
+import com.example.studentmanagementonlinesystem.mapper.StudentCourseTeacherMapper;
 import com.example.studentmanagementonlinesystem.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +17,12 @@ import java.util.Map;
 public class CourseServiceImpl implements CourseService {
     @Autowired
     private CourseMapper courseMapper;
+
+    @Autowired
+    private StudentCourseTeacherMapper studentCourseTeacherMapper;
+
+    @Autowired
+    private CourseTeacherMapper courseTeacherMapper;
 
     @Override
     public List<Course> findBySearch(Map<String, String> map) {
@@ -77,7 +86,10 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Transactional
     public boolean deleteById(Integer cid) {
+        studentCourseTeacherMapper.deleteByCid(cid);
+        courseTeacherMapper.deleteByCid(cid);
         return courseMapper.deleteById(cid);
     }
 }

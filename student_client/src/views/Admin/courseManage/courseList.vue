@@ -12,7 +12,7 @@
               cancel-button-text="Cancel"
               icon-color="red"
               title="Deletion cannot be undone"
-              @confirm="deleteTeacher(scope.row)"
+              @confirm="deleteCourse(scope.row)"
             >
               <template #reference>
                 <el-button type="text" size="small">Delete</el-button>
@@ -60,7 +60,7 @@ const { tableData, pageSize, total, tmpList, type } = toRefs(state)
 
 function select(row) {}
 
-function deleteTeacher(row) {
+function deleteCourse(row) {
   axios
     .get('/course/deleteById/' + row.cid)
     .then(function (resp) {

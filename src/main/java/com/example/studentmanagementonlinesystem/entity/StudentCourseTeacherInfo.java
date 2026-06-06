@@ -14,6 +14,9 @@ public class StudentCourseTeacherInfo {
     private Integer sid;
     private Integer cid;
     private Integer tid;
+    private String sname;
+    private String cname;
+    private String tname;
     private Float grade;
     private String term;
 }

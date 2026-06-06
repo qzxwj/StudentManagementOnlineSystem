@@ -84,7 +84,7 @@ const state = reactive({
       { required: true, message: 'Please enterUser ID', trigger: 'blur' },
       { type: 'number', message: 'Please enter a number', trigger: 'blur' },
     ],
-    password: [{ required: true, message: 'Please enterPassword', trigger: 'blur' }],
+    password: [{ required: true, message: 'Please enter Password', trigger: 'blur' }],
     type: [{ required: true, message: 'Please select', trigger: 'change' }],
   },
 })

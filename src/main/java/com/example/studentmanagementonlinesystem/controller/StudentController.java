@@ -15,12 +15,6 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @PostMapping("/addStudent")
-    public boolean addStudent(@RequestBody Student student) {
-        System.out.println("Saving student: " + student);
-        return studentService.save(student);
-    }
-
     @PostMapping("/register")
     public RegisterResponse register(@RequestBody Student student) {
         if (student == null || isBlank(student.getSname()) || isBlank(student.getPassword())) {
@@ -50,12 +44,6 @@ public class StudentController {
         else {
             return true;
         }
-    }
-
-    @PostMapping("/findBySearch")
-    public List<Student> findBySearch(@RequestBody Student student) {
-        Integer fuzzy = (student.getPassword() == null) ? 0 : 1;
-        return studentService.findBySearch(student.getSid(), student.getSname(), fuzzy);
     }
 
     @GetMapping("/findById/{sid}")

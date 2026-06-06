@@ -15,31 +15,6 @@
         where sid = #{sid}
     </select>
 
-    <select id="findBySearch" resultType="Student">
-        select sid, sname, password
-        from s
-        <where>
-            <if test="student != null">
-                <if test="student.sid != null">
-                    and sid = #{student.sid}
-                </if>
-                <if test="student.sname != null and student.sname != ''">
-                    <choose>
-                        <when test="fuzzy != null and fuzzy == 1">
-                            and sname like concat('%', #{student.sname}, '%')
-                        </when>
-                        <otherwise>
-                            and sname = #{student.sname}
-                        </otherwise>
-                    </choose>
-                </if>
-                <if test="student.password != null and student.password != ''">
-                    and password = #{student.password}
-                </if>
-            </if>
-        </where>
-    </select>
-
     <update id="updateById">
         update s
         <set>
@@ -52,11 +27,6 @@
         </set>
         where sid = #{student.sid}
     </update>
-
-    <insert id="save">
-        insert into s (sid, sname, password)
-        values (#{student.sid}, #{student.sname}, #{student.password})
-    </insert>
 
     <insert id="register" useGeneratedKeys="true" keyProperty="student.sid">
         insert into s (sname, password)

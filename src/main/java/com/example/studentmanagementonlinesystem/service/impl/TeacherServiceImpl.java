@@ -57,11 +57,6 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public boolean save(Teacher teacher) {
-        return teacherMapper.save(teacher);
-    }
-
-    @Override
     public Teacher register(Teacher teacher) {
         teacher.setTid(null);
         return teacherMapper.register(teacher) ? teacher : null;

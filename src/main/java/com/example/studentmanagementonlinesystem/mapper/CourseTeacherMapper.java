@@ -36,4 +36,7 @@ public interface CourseTeacherMapper {
 
     @Delete("DELETE FROM studentms.ct WHERE tid = #{tid}")
     public int deleteByTid(@Param("tid") Integer tid);
+
+    @Delete("DELETE FROM studentms.ct WHERE cid = #{cid}")
+    public int deleteByCid(@Param("cid") Integer cid);
 }

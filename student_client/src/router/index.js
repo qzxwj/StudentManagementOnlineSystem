@@ -4,16 +4,13 @@ import register from '@/views/register/index.vue'
 import admin from '../views/Admin/index.vue'
 import adminHome from '../views/Admin/home.vue'
 import studentManage from '../views/Admin/studentManage/index.vue'
-import addStudent from '@/views/Admin/studentManage/addStudent.vue'
 import studentList from '@/views/Admin/studentManage/studentList.vue'
 import editorStudent from '@/views/Admin/studentManage/editorStudent.vue'
 import teacherManage from '@/views/Admin/teacherManage/index.vue'
-import addTeacher from '@/views/Admin/teacherManage/addTeacher.vue'
 import editorTeacher from '@/views/Admin/teacherManage/editorTeacher.vue'
 import courseManage from '@/views/Admin/courseManage/index.vue'
 import addCourse from '@/views/Admin/courseManage/addCourse.vue'
 import teacher from '@/views/Teacher/index.vue'
-import queryStudent from '@/views/Admin/studentManage/queryStudent.vue'
 import queryTeacher from '@/views/Admin/teacherManage/queryTeacher.vue'
 import student from '@/views/Student/index.vue'
 import editorCourse from '@/views/Admin/courseManage/editorCourse.vue'
@@ -93,12 +90,6 @@ const routes = [
         meta: { requireAuth: true, title: 'Student Management' },
         children: [
           {
-            path: '/addStudent',
-            name: 'adminAddStudent',
-            component: addStudent,
-            meta: { requireAuth: true, title: 'Add Student' },
-          },
-          {
             path: '/studentList',
             name: 'adminStudentList',
             component: studentList,
@@ -110,20 +101,6 @@ const routes = [
             component: editorStudent,
             meta: { requireAuth: true, title: 'EditStudent' },
           },
-          {
-            path: '/queryStudent',
-            name: 'adminQueryStudent',
-            component: queryStudent,
-            meta: { requireAuth: true, title: 'Search' },
-            children: [
-              {
-                path: '/queryStudent/studentList',
-                name: 'adminQueryStudentList',
-                component: studentList,
-                meta: { requireAuth: true, title: 'Student Management' },
-              },
-            ],
-          },
         ],
       },
       {
@@ -132,12 +109,6 @@ const routes = [
         component: teacherManage,
         meta: { requireAuth: true, title: 'Teacher Management' },
         children: [
-          {
-            path: '/addTeacher',
-            name: 'adminAddTeacher',
-            component: addTeacher,
-            meta: { requireAuth: true, title: 'Add Teacher' },
-          },
           {
             path: '/queryTeacher',
             name: 'adminQueryTeacher',
@@ -163,7 +134,7 @@ const routes = [
             path: '/addCourse',
             name: 'adminAddCourse',
             component: addCourse,
-            meta: { requireAuth: true, title: 'Course Management' },
+            meta: { requireAuth: true, title: 'Add' },
           },
           {
             path: '/queryCourse',
@@ -191,13 +162,13 @@ const routes = [
         path: '/CourseTeacher',
         name: 'adminCourseTeacherManage',
         component: CourseTeacherManage,
-        meta: { requireAuth: true, title: 'Course Management' },
+        meta: { requireAuth: true, title: 'Course-Teacher' },
         children: [
           {
             path: '/queryCourseTeacher',
             name: 'adminQueryCourseTeacher',
             component: queryCourseTeacher,
-            meta: { requireAuth: true, title: 'Course Management' },
+            meta: { requireAuth: true, title: 'Course-Teacher' },
           },
         ],
       },
@@ -268,7 +239,7 @@ const routes = [
             path: '/myOfferCourse',
             name: 'teacherMyOfferCourse',
             component: myOfferCourse,
-            meta: { requireAuth: true, title: 'ManagementOffer Course' },
+            meta: { requireAuth: true, title: 'Manage Course' },
           },
           {
             path: '/offerCourse',

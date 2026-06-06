@@ -16,11 +16,6 @@ public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
-    @PostMapping("/addTeacher")
-    public boolean addTeacher(@RequestBody Teacher teacher) {
-        return teacherService.save(teacher);
-    }
-
     @PostMapping("/register")
     public RegisterResponse register(@RequestBody Teacher teacher) {
         if (teacher == null || isBlank(teacher.getTname()) || isBlank(teacher.getPassword())) {

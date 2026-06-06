@@ -5,8 +5,8 @@
         :model="ruleForm"
         :rules="rules"
         ref="ruleFormRef"
-        label-width="100px"
-        class="demo-ruleForm"
+        label-width="150px"
+        class="demo-ruleForm course-edit-form"
       >
         <el-form-item label="Course Name" prop="cname">
           <el-input v-model="ruleForm.cname" :value="ruleForm.cname"></el-input>
@@ -86,3 +86,9 @@ function resetForm(formName) {
   ruleFormRef.value.resetFields()
 }
 </script>
+
+<style scoped>
+.course-edit-form :deep(.el-form-item__label) {
+  white-space: nowrap;
+}
+</style>

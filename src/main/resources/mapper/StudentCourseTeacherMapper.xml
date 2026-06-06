@@ -55,6 +55,9 @@
             <if test="highBound != null">
                 AND #{highBound} >= sct.grade
             </if>
+            <if test="term != null and term != ''">
+                AND sct.term = #{term}
+            </if>
         </where>
     </select>
 </mapper>

@@ -48,11 +48,6 @@
         where tid = #{teacher.tid}
     </update>
 
-    <insert id="save">
-        insert into t (tid, tname, password)
-        values (#{teacher.tid}, #{teacher.tname}, #{teacher.password})
-    </insert>
-
     <insert id="register" useGeneratedKeys="true" keyProperty="teacher.tid">
         insert into t (tname, password)
         values (#{teacher.tname}, #{teacher.password})

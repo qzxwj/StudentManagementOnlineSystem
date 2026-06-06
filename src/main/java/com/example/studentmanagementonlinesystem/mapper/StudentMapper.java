@@ -13,11 +13,7 @@ public interface StudentMapper {
 
     Student findById(@Param("sid") Integer sid);
 
-    List<Student> findBySearch(@Param("student") Student student, @Param("fuzzy") Integer fuzzy);
-
     boolean updateById(@Param("student") Student student);
-
-    boolean save(@Param("student") Student student);
 
     boolean register(@Param("student") Student student);
 

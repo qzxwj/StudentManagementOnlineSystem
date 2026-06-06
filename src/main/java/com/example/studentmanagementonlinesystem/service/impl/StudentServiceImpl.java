@@ -37,18 +37,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> findBySearch(Integer sid, String sname, Integer fuzzy) {
-        Student student = new Student();
-        student.setSid(sid);
-        student.setSname(sname);
-        fuzzy = (fuzzy == null) ? 0 : fuzzy;
-
-        System.out.println();
-
-        return studentMapper.findBySearch(student, fuzzy);
-    }
-
-    @Override
     public Integer getLength() {
         return studentMapper.findAll().size();
     }
@@ -61,11 +49,6 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public boolean updateById(Student student) {
         return studentMapper.updateById(student);
-    }
-
-    @Override
-    public boolean save(Student student) {
-        return studentMapper.save(student);
     }
 
     @Override

@@ -2,7 +2,7 @@
   <div>
     <el-container>
       <el-main>
-        <h1>Current TermOffer Course</h1>
+        <h1>Current Term Offer Course</h1>
         <el-card class="app-table-card">
           <el-table :data="tableData" border stripe style="width: 100%">
             <el-table-column fixed prop="cid" label="Course ID" width="150"> </el-table-column>

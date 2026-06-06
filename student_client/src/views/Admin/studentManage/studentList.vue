@@ -36,10 +36,9 @@
 <script setup>
 import { getCurrentInstance, reactive, toRefs } from 'vue'
 
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const route = useRoute()
 
 const { proxy } = getCurrentInstance()
 
@@ -47,38 +46,12 @@ const state = reactive({
   tableData: null,
   pageSize: 7,
   total: null,
-  ruleForm: null,
-  tmpList: null,
 })
 
-const { tableData, pageSize, total, ruleForm, tmpList } = toRefs(state)
+const { tableData, pageSize, total } = toRefs(state)
 
-if (state.tmpList !== null) state.tmpList = null
-// ManagementSearch
-state.ruleForm = route.query.ruleForm
-if (
-  route.query.ruleForm === undefined ||
-  (state.ruleForm.sid === null && state.ruleForm.sname === null)
-) {
-  axios.get('/student/getLength').then(function (resp) {
-    state.total = resp.data
-  })
-
-  axios.get('/student/findByPage/0/' + state.pageSize).then(function (resp) {
-    state.tableData = resp.data
-  })
-} else {
-  // ManagementSearchSearch
-  axios.post('/student/findBySearch', state.ruleForm).then(function (resp) {
-    state.tmpList = resp.data
-    state.total = resp.data.length
-    let start = 0,
-      end = state.pageSize
-    let length = state.tmpList.length
-    let ans = end < length ? end : length
-    state.tableData = state.tmpList.slice(start, ans)
-  })
-}
+loadTotal()
+loadPage(0)
 
 function deleteStudent(row) {
   axios
@@ -90,11 +63,8 @@ function deleteStudent(row) {
           message: 'Deleted successfully',
           type: 'success',
         })
-        if (state.tmpList === null) {
-          window.location.reload()
-        } else {
-          router.push('/queryStudent')
-        }
+        loadTotal()
+        loadPage(0)
       } else {
         proxy.$message({
           showClose: true,
@@ -113,18 +83,19 @@ function deleteStudent(row) {
 }
 
 function changePage(page) {
-  page = page - 1
-  if (state.tmpList === null) {
-    axios.get('/student/findByPage/' + page + '/' + state.pageSize).then(function (resp) {
-      state.tableData = resp.data
-    })
-  } else {
-    let start = page * state.pageSize,
-      end = state.pageSize * (page + 1)
-    let length = state.tmpList.length
-    let ans = end < length ? end : length
-    state.tableData = state.tmpList.slice(start, ans)
-  }
+  loadPage(page - 1)
+}
+
+function loadTotal() {
+  axios.get('/student/getLength').then(function (resp) {
+    state.total = resp.data
+  })
+}
+
+function loadPage(page) {
+  axios.get('/student/findByPage/' + page + '/' + state.pageSize).then(function (resp) {
+    state.tableData = resp.data
+  })
 }
 
 function editor(row) {
