@@ -5,11 +5,11 @@
     <div class="login-split">
       <section class="login-feature" aria-hidden="true">
         <div class="login-feature__inner">
-          <p class="login-feature__eyebrow">NUIST · 2026–2027</p>
-          <h1 class="login-feature__heading">Course Management Online System</h1>
+          <p class="login-feature__eyebrow">NUIST · TERM 2026–2027</p>
+          <h1 class="login-feature__heading">Course Management<br />Online System</h1>
           <p class="login-feature__sub">
-            One online system for students to pick courses, teachers to offer them, and
-            administrators to keep things running
+            One unified workspace for students to pick courses, teachers to offer them,
+            and administrators to keep everything in orbit.
           </p>
           <ul class="login-feature__list">
             <li>
@@ -34,6 +34,7 @@
               </div>
             </li>
           </ul>
+          <p class="login-feature__footer mono-eyebrow">ORBIT SELECT · v3.0</p>
         </div>
       </section>
 
@@ -45,7 +46,7 @@
             </div>
             <div class="login-brand__text">
               <span>NUIST · Course Selection</span>
-              <span class="login-brand__tagline">Nanjing University of Information Science and Technology</span>
+              <span class="login-brand__tagline">Nanjing University · IST</span>
             </div>
           </div>
 
@@ -233,7 +234,7 @@ function goRegister(type) {
   z-index: 1;
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: 1.1fr 1fr;
 }
 
 .login-feature {
@@ -244,34 +245,41 @@ function goRegister(type) {
 }
 
 .login-feature__inner {
-  max-width: 460px;
+  max-width: 480px;
+  position: relative;
 }
 
 .login-feature__eyebrow {
-  margin: 0 0 14px;
-  color: var(--sky-700);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  margin: 0 0 20px;
+  color: var(--color-ink-subtle);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
 .login-feature__heading {
-  margin: 0 0 18px;
-  color: var(--ink);
-  font-size: 48px;
+  margin: 0 0 20px;
+  font-family: var(--font-display);
+  font-size: 56px;
   font-weight: 600;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
-  background: linear-gradient(180deg, var(--ink) 0%, var(--sky-900) 100%);
+  letter-spacing: var(--tracking-display);
+  line-height: 1.02;
+  color: var(--color-ink);
+  background: linear-gradient(
+    180deg,
+    var(--color-ink) 0%,
+    var(--color-accent-twilight) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .login-feature__sub {
-  margin: 0 0 36px;
-  color: var(--ink-muted);
+  margin: 0 0 40px;
+  color: var(--color-ink-muted);
   font-size: 16px;
   line-height: 1.6;
   max-width: 440px;
@@ -279,11 +287,11 @@ function goRegister(type) {
 
 .login-feature__list {
   list-style: none;
-  margin: 0;
+  margin: 0 0 40px;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .login-feature__list li {
@@ -291,11 +299,17 @@ function goRegister(type) {
   align-items: flex-start;
   gap: 14px;
   padding: 16px 18px;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: var(--color-surface-glass);
+  border: 1px solid var(--color-hairline);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-inset-top);
+  transition: border-color var(--duration-base) var(--ease-standard);
+}
+
+.login-feature__list li:hover {
+  border-color: var(--color-hairline-strong);
 }
 
 .login-feature__dot {
@@ -307,23 +321,23 @@ function goRegister(type) {
 }
 
 .login-feature__dot--sky {
-  background: var(--sky-500);
-  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.2);
+  background: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(94, 106, 210, 0.22);
 }
 
 .login-feature__dot--mint {
-  background: #34d399;
-  box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.2);
+  background: var(--color-status-open);
+  box-shadow: 0 0 0 4px rgba(159, 201, 162, 0.22);
 }
 
 .login-feature__dot--lavender {
-  background: #a78bfa;
-  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.2);
+  background: var(--color-accent-twilight);
+  box-shadow: 0 0 0 4px rgba(196, 181, 253, 0.22);
 }
 
 .login-feature__title {
   margin: 0;
-  color: var(--ink);
+  color: var(--color-ink);
   font-size: 14.5px;
   font-weight: 600;
   letter-spacing: -0.005em;
@@ -331,15 +345,21 @@ function goRegister(type) {
 
 .login-feature__hint {
   margin: 2px 0 0;
-  color: var(--ink-muted);
+  color: var(--color-ink-subtle);
   font-size: 13px;
+}
+
+.login-feature__footer {
+  margin: 0;
+  color: var(--color-ink-tertiary);
 }
 
 .login-form-section {
   display: grid;
   place-items: center;
   padding: 64px 48px;
-  background: var(--canvas-soft);
+  background: var(--color-canvas-elevated);
+  border-left: 1px solid var(--color-hairline);
   position: relative;
 }
 
@@ -353,10 +373,12 @@ function goRegister(type) {
 }
 
 .login-form :deep(.el-form-item__label) {
-  font-weight: 600;
-  color: var(--ink);
-  font-size: 13px;
-  letter-spacing: 0;
+  font-weight: 500;
+  color: var(--color-ink-muted);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
   padding-bottom: 6px;
 }
 
@@ -379,32 +401,47 @@ function goRegister(type) {
 
 .login-role-group :deep(.el-radio-button__inner) {
   width: 100%;
-  border-radius: var(--radius-sm) !important;
-  border: 1px solid var(--hairline) !important;
-  background: var(--canvas) !important;
-  color: var(--ink-muted);
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--color-hairline) !important;
+  background: var(--color-surface-1) !important;
+  color: var(--color-ink-subtle);
   font-weight: 500;
   box-shadow: none !important;
-  padding: 10px 14px;
+  padding: 12px 14px;
 }
 
-.login-role-group :deep(.el-radio-button__original-radio:checked + .el-radio-button__inner) {
-  background: var(--sky-50) !important;
-  color: var(--sky-700) !important;
-  border-color: var(--sky-300) !important;
-  box-shadow: 0 0 0 2px var(--sky-200) !important;
+.login-role-group
+  :deep(.el-radio-button__original-radio:checked + .el-radio-button__inner) {
+  background: var(--color-primary-soft) !important;
+  color: var(--color-primary-hover) !important;
+  border-color: var(--color-primary) !important;
+  box-shadow:
+    0 0 0 1px var(--color-primary) inset,
+    var(--shadow-glow-sm) !important;
   font-weight: 600;
 }
 
 .register-actions__sep {
-  color: var(--ink-soft);
+  color: var(--color-ink-tertiary);
 }
 
 .login-footer {
   margin: 32px 0 0;
   text-align: center;
-  color: var(--ink-subtle);
-  font-size: 12.5px;
+  color: var(--color-ink-tertiary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+@media (max-width: 1100px) {
+  .login-feature {
+    padding: 64px 48px;
+  }
+  .login-feature__heading {
+    font-size: 44px;
+  }
 }
 
 @media (max-width: 960px) {
@@ -416,6 +453,7 @@ function goRegister(type) {
   }
   .login-form-section {
     padding: 56px 24px;
+    border-left: 0;
   }
   .login-brand {
     display: flex;

@@ -16,9 +16,9 @@
     </nav>
 
     <div class="topbar-user">
-      <div class="topbar-item topbar-item--term">
+      <div class="topbar-item topbar-item--term" :title="currentTerm || 'Current term'">
         <el-icon><Calendar /></el-icon>
-        <span>{{ currentTerm || 'Current term' }}</span>
+        <span class="topbar-term">{{ termLabel }}</span>
       </div>
       <span class="topbar-divider" aria-hidden="true"></span>
       <el-popconfirm
@@ -51,6 +51,12 @@ const name = ref(sessionStorage.getItem('name'))
 const currentTerm = ref(sessionStorage.getItem('currentTerm'))
 
 const initial = computed(() => (name.value || 'U').charAt(0).toUpperCase())
+
+const termLabel = computed(() => {
+  const raw = currentTerm.value
+  if (!raw) return 'TERM · —'
+  return `TERM · ${raw}`
+})
 
 const breadcrumbs = computed(() => {
   const parts = []
@@ -91,19 +97,20 @@ function out() {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--ink-muted);
+  color: var(--color-ink-muted);
   font-size: 14px;
 }
 
 .topbar-item--term {
-  color: var(--ink-muted);
+  color: var(--color-ink-subtle);
+  padding: 0 14px;
 }
 
 .topbar-divider {
   display: inline-block;
   width: 1px;
   height: 20px;
-  background: var(--hairline);
+  background: var(--color-hairline);
   margin: 0 6px;
 }
 </style>

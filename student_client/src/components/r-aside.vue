@@ -5,9 +5,9 @@
         <div class="app-sidebar__monogram">
           <el-icon><Reading /></el-icon>
         </div>
-        <div>
+        <div class="app-sidebar__brand-text">
           <p class="app-sidebar__title">NUIST Course</p>
-          <p class="app-sidebar__subtitle">{{ roleLabel }} workspace</p>
+          <p class="app-sidebar__subtitle">{{ roleLabel }} · Workspace</p>
         </div>
       </div>
       <el-menu router :default-active="route.path">
@@ -132,5 +132,10 @@ function iconFor(name, isParent) {
 .app-sidebar :deep(.el-sub-menu .el-menu-item) {
   margin: 2px 12px;
   padding-left: 38px !important;
+}
+
+.app-sidebar__brand-text {
+  min-width: 0;
+  flex: 1;
 }
 </style>

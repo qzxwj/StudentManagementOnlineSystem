@@ -30,6 +30,7 @@ import studentCourseGrade from '@/views/Student/courseGrade/index.vue'
 import queryCourseGrade from '@/views/Student/courseGrade/queryCourseGrade.vue'
 import queryGradeCourse from '@/views/Admin/gradeCourseManage/queryGradeCourse.vue'
 import editorGradeCourse from '@/views/Admin/gradeCourseManage/editorGradeCourse.vue'
+import gradeCourseManage from '@/views/Admin/gradeCourseManage/index.vue'
 import teacherGradeCourseManage from '@/views/Teacher/teacherGradeCourseManage/index.vue'
 import teacherQueryGradeCourse from '@/views/Teacher/teacherGradeCourseManage/teacherQueryGradeCourse.vue'
 import teacherEditorGradeCourse from '@/views/Teacher/teacherGradeCourseManage/teacherEditorGradeCourse.vue'
@@ -175,7 +176,7 @@ const routes = [
       {
         name: 'adminGradeCourseManage',
         path: '/gradeCourseManage',
-        component: studentManage,
+        component: gradeCourseManage,
         meta: { requireAuth: true, title: 'Grade Management' },
         children: [
           {

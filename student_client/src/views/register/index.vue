@@ -5,7 +5,7 @@
     <div class="register-split">
       <section class="register-feature" aria-hidden="true">
         <div class="register-feature__inner">
-          <p class="register-feature__eyebrow">Create your account</p>
+          <p class="register-feature__eyebrow">NUIST · CREATE ACCOUNT</p>
           <h1 class="register-feature__heading">
             {{ pageTitle === 'Teacher Register' ? 'Join the faculty.' : 'Welcome to NUIST' }}
           </h1>
@@ -246,7 +246,7 @@ function goLogin() {
   display: grid;
   place-items: center;
   padding: 80px 64px;
-  background: linear-gradient(180deg, rgba(224, 242, 254, 0.4), rgba(255, 255, 255, 0));
+  position: relative;
 }
 
 .register-feature__inner {
@@ -254,26 +254,35 @@ function goLogin() {
 }
 
 .register-feature__eyebrow {
-  margin: 0 0 14px;
-  color: var(--sky-700);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  margin: 0 0 20px;
+  color: var(--color-ink-subtle);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
 .register-feature__heading {
   margin: 0 0 18px;
-  color: var(--ink);
-  font-size: 44px;
+  font-family: var(--font-display);
+  font-size: 48px;
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: var(--tracking-display);
   line-height: 1.05;
+  background: linear-gradient(
+    180deg,
+    var(--color-ink) 0%,
+    var(--color-accent-twilight) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .register-feature__sub {
   margin: 0 0 36px;
-  color: var(--ink-muted);
+  color: var(--color-ink-muted);
   font-size: 16px;
   line-height: 1.6;
 }
@@ -288,7 +297,8 @@ function goLogin() {
   display: grid;
   place-items: center;
   padding: 64px 48px;
-  background: var(--canvas-soft);
+  background: var(--color-canvas-elevated);
+  border-left: 1px solid var(--color-hairline);
 }
 
 .register-form-inner {
@@ -301,9 +311,12 @@ function goLogin() {
 }
 
 .register-form :deep(.el-form-item__label) {
-  font-weight: 600;
-  color: var(--ink);
-  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-ink-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   padding-bottom: 6px;
 }
 
@@ -315,8 +328,20 @@ function goLogin() {
 .register-footer {
   margin: 32px 0 0;
   text-align: center;
-  color: var(--ink-subtle);
-  font-size: 12.5px;
+  color: var(--color-ink-tertiary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+@media (max-width: 1100px) {
+  .register-feature {
+    padding: 64px 48px;
+  }
+  .register-feature__heading {
+    font-size: 40px;
+  }
 }
 
 @media (max-width: 960px) {
@@ -328,6 +353,7 @@ function goLogin() {
   }
   .register-form-section {
     padding: 56px 24px;
+    border-left: 0;
   }
   .register-brand {
     display: flex;
