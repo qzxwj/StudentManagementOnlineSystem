@@ -1,74 +1,78 @@
 <template>
   <div>
-    <el-container>
-      <el-main>
-        <el-card class="app-query-card">
-          <el-form
-            :inline="true"
-            :model="ruleForm"
-            :rules="rules"
-            ref="ruleFormRef"
-            label-width="120px"
-            class="demo-ruleForm"
-          >
-            <el-form-item label="Student ID" prop="sid">
-              <el-input v-model.number="ruleForm.sid"></el-input>
-            </el-form-item>
-            <el-form-item label="Student Name" prop="sname">
-              <el-input v-model="ruleForm.sname"></el-input>
-            </el-form-item>
-            <el-form-item label="Fuzzy Search" prop="sFuzzy">
-              <el-switch v-model="ruleForm.sFuzzy"></el-switch>
-            </el-form-item>
-            <el-form-item label="Teacher ID" prop="tid">
-              <el-input v-model.number="ruleForm.tid"></el-input>
-            </el-form-item>
-            <el-form-item label="Teacher Name" prop="tname">
-              <el-input v-model="ruleForm.tname"></el-input>
-            </el-form-item>
-            <el-form-item label="Fuzzy Search" prop="tFuzzy">
-              <el-switch v-model="ruleForm.tFuzzy"></el-switch>
-            </el-form-item>
-            <el-form-item label="Course ID" prop="cid">
-              <el-input v-model.number="ruleForm.cid"></el-input>
-            </el-form-item>
-            <el-form-item label="Course Name" prop="cname">
-              <el-input v-model="ruleForm.cname"></el-input>
-            </el-form-item>
-            <el-form-item label="Fuzzy Search" prop="cFuzzy">
-              <el-switch v-model="ruleForm.cFuzzy"></el-switch>
-            </el-form-item>
-            <el-form-item label="Grade Management" prop="lowBound">
-              <el-input v-model.number="ruleForm.lowBound"></el-input>
-            </el-form-item>
-            <el-form-item label="Grade Management" prop="highBound">
-              <el-input v-model.number="ruleForm.highBound"></el-input>
-            </el-form-item>
-            <el-form-item label="SelectTerm">
-              <el-select v-model="ruleForm.term" placeholder="Please select a term">
-                <el-option
-                  v-for="(item, index) in termList"
-                  :key="index"
-                  :label="item"
-                  :value="item"
-                ></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="resetForm">Reset</el-button>
-            </el-form-item>
-          </el-form>
-        </el-card>
-        <el-card class="app-result-card">
-          <grade-course-list :rule-form="ruleForm"></grade-course-list>
-        </el-card>
-      </el-main>
-    </el-container>
+    <div class="page-header">
+      <div>
+        <p class="page-header__eyebrow">Admin · Grades</p>
+        <h1 class="page-header__title">Search grades</h1>
+        <p class="page-header__subtitle">Filter by student, teacher, course, term, or grade range.</p>
+      </div>
+      <div class="page-header__actions">
+        <el-button @click="resetForm">
+          <el-icon><Refresh /></el-icon><span>Reset</span>
+        </el-button>
+      </div>
+    </div>
+
+    <el-card class="app-query-card">
+      <el-form
+        :inline="true"
+        :model="ruleForm"
+        :rules="rules"
+        ref="ruleFormRef"
+        class="query-form"
+      >
+        <el-form-item label="Student ID" prop="sid">
+          <el-input v-model.number="ruleForm.sid" placeholder="Student ID" clearable />
+        </el-form-item>
+        <el-form-item label="Student name" prop="sname">
+          <el-input v-model="ruleForm.sname" placeholder="Search by name" clearable />
+        </el-form-item>
+        <el-form-item label="Fuzzy (student)">
+          <el-switch v-model="ruleForm.sFuzzy" />
+        </el-form-item>
+        <el-form-item label="Teacher ID" prop="tid">
+          <el-input v-model.number="ruleForm.tid" placeholder="Teacher ID" clearable />
+        </el-form-item>
+        <el-form-item label="Teacher name" prop="tname">
+          <el-input v-model="ruleForm.tname" placeholder="Search by name" clearable />
+        </el-form-item>
+        <el-form-item label="Fuzzy (teacher)">
+          <el-switch v-model="ruleForm.tFuzzy" />
+        </el-form-item>
+        <el-form-item label="Course ID" prop="cid">
+          <el-input v-model.number="ruleForm.cid" placeholder="Course ID" clearable />
+        </el-form-item>
+        <el-form-item label="Course name" prop="cname">
+          <el-input v-model="ruleForm.cname" placeholder="Search by name" clearable />
+        </el-form-item>
+        <el-form-item label="Fuzzy (course)">
+          <el-switch v-model="ruleForm.cFuzzy" />
+        </el-form-item>
+        <el-form-item label="Min grade" prop="lowBound">
+          <el-input-number v-model="ruleForm.lowBound" :min="0" :max="100" placeholder="0" />
+        </el-form-item>
+        <el-form-item label="Max grade" prop="highBound">
+          <el-input-number v-model="ruleForm.highBound" :min="0" :max="100" placeholder="100" />
+        </el-form-item>
+        <el-form-item label="Term">
+          <el-select v-model="ruleForm.term" placeholder="All terms" clearable>
+            <el-option
+              v-for="(item, index) in termList"
+              :key="index"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
+        </el-form-item>
+      </el-form>
+    </el-card>
+
+    <grade-course-list :rule-form="ruleForm"></grade-course-list>
   </div>
 </template>
 <script setup>
 import { reactive, ref, toRefs } from 'vue'
-
+import { Refresh } from '@element-plus/icons-vue'
 import GradeCourseList from '@/views/Admin/gradeCourseManage/gradeCourseList.vue'
 
 const ruleFormRef = ref(null)
@@ -105,7 +109,21 @@ axios.get('/SCT/findAllTerm').then(function (resp) {
   state.termList = resp.data
 })
 
-function resetForm(formName) {
+function resetForm() {
   ruleFormRef.value.resetFields()
 }
 </script>
+
+<style scoped>
+.query-form {
+  max-width: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  align-items: flex-end;
+}
+.query-form :deep(.el-form-item) {
+  margin-bottom: 0;
+  margin-right: 0;
+}
+</style>

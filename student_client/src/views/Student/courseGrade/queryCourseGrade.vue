@@ -1,36 +1,67 @@
 <template>
   <div>
-    <el-card class="app-panel">
-      <el-form>
-        <el-form-item label="SelectTerm">
-          <el-select v-model="term" placeholder="Please select a term">
+    <div class="page-header">
+      <div>
+        <p class="page-header__eyebrow">Student · Grades</p>
+        <h1 class="page-header__title">My grades</h1>
+        <p class="page-header__subtitle">Term-by-term grade history.</p>
+      </div>
+    </div>
+
+    <el-card class="app-query-card">
+      <el-form :inline="true" class="query-form">
+        <el-form-item label="Term">
+          <el-select v-model="term" placeholder="All terms" clearable style="width: 200px">
             <el-option
               v-for="(item, index) in termList"
               :key="index"
               :label="item"
               :value="item"
-            ></el-option>
+            />
           </el-select>
         </el-form-item>
       </el-form>
     </el-card>
+
     <el-card class="app-table-card">
-      <el-table :data="tableData" border style="width: 100%">
-        <el-table-column fixed prop="cid" label="Course ID" width="150"> </el-table-column>
-        <el-table-column prop="cname" label="Course ID" width="150"> </el-table-column>
-        <el-table-column prop="tid" label="Teacher ID" width="150"> </el-table-column>
-        <el-table-column prop="tname" label="Teacher Name" width="150"> </el-table-column>
-        <el-table-column prop="ccredit" label="Credits" width="150"> </el-table-column>
-        <el-table-column prop="grade" label="Grade" width="150"> </el-table-column>
+      <el-table :data="tableData" empty-text="No grades for this term yet">
+        <el-table-column prop="cid" label="Course ID" width="160">
+          <template #default="scope">
+            <span class="cell-mono">{{ scope.row.cid }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="cname" label="Course name" />
+        <el-table-column prop="tid" label="Teacher ID" width="140">
+          <template #default="scope">
+            <span class="cell-mono cell-mono--muted">{{ scope.row.tid }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="tname" label="Teacher" width="160" />
+        <el-table-column prop="ccredit" label="Credits" width="120">
+          <template #default="scope">
+            <el-tag size="small" type="primary">{{ scope.row.ccredit }} credits</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="grade" label="Grade" width="140">
+          <template #default="scope">
+            <el-tag size="small" :type="gradeType(scope.row.grade)">
+              {{ scope.row.grade ?? '—' }}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <template #empty>
+          <el-empty description="No grades for this term" :image-size="80" />
+        </template>
       </el-table>
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="total"
-        :page-size="pageSize"
-        @current-change="changePage"
-      >
-      </el-pagination>
+      <div class="app-pagination">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="total || 0"
+          :page-size="pageSize"
+          @current-change="changePage"
+        />
+      </div>
     </el-card>
   </div>
 </template>
@@ -62,9 +93,17 @@ function changePage(page) {
   state.tableData = state.tmpList.slice(start, ans)
 }
 
+function gradeType(grade) {
+  if (grade === null || grade === undefined) return 'info'
+  const g = Number(grade)
+  if (g >= 85) return 'success'
+  if (g >= 60) return 'primary'
+  return 'danger'
+}
+
 watch(
   () => state.term,
-  (newTerm, oldTerm) => {
+  (newTerm) => {
     const sid = sessionStorage.getItem('sid')
     axios.get('/SCT/findBySid/' + sid + '/' + newTerm).then(function (resp) {
       state.tmpList = resp.data
@@ -80,12 +119,29 @@ watch(
 )
 </script>
 
-<!--
-  TODO:
-  1. Admin:
-    1. Student Management
-    2. Grade Management(Current Term)
-  2. Student:Grade Management
-  3. Teacher:Grade Management(?Management)(Current Term)
-
--->
+<style scoped>
+.query-form {
+  max-width: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  align-items: flex-end;
+}
+.query-form :deep(.el-form-item) {
+  margin-bottom: 0;
+  margin-right: 0;
+}
+.app-pagination {
+  padding: 16px 20px;
+  border-top: 1px solid var(--hairline-soft);
+}
+.cell-mono {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--sky-700);
+  font-weight: 500;
+}
+.cell-mono--muted {
+  color: var(--ink-muted);
+}
+</style>

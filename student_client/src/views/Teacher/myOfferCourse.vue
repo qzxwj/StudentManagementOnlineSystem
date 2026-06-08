@@ -1,30 +1,55 @@
 <template>
   <div>
-    <el-container>
-      <el-main>
-        <h1>Current Term Offer Course</h1>
-        <el-card class="app-table-card">
-          <el-table :data="tableData" border stripe style="width: 100%">
-            <el-table-column fixed prop="cid" label="Course ID" width="150"> </el-table-column>
-            <el-table-column prop="cname" label="Course Name" width="150"> </el-table-column>
-            <el-table-column prop="ccredit" label="Credits" width="150"> </el-table-column>
-          </el-table>
-          <el-pagination
-            background
-            layout="prev, pager, next"
-            :total="total"
-            :page-size="pageSize"
-            @current-change="changePage"
-          >
-          </el-pagination>
-        </el-card>
-      </el-main>
-    </el-container>
+    <div class="page-header">
+      <div>
+        <p class="page-header__eyebrow">Teacher · Courses</p>
+        <h1 class="page-header__title">My offerings</h1>
+        <p class="page-header__subtitle">Courses you're teaching for the {{ term || 'current' }} term.</p>
+      </div>
+      <div class="page-header__actions">
+        <el-button type="primary" class="press" @click="$router.push('/offerCourse')">
+          <el-icon><Plus /></el-icon><span>Offer a course</span>
+        </el-button>
+      </div>
+    </div>
+
+    <el-card class="app-table-card">
+      <el-table :data="tableData" empty-text="You haven't offered any courses yet">
+        <el-table-column prop="cid" label="Course ID" width="160">
+          <template #default="scope">
+            <span class="cell-mono">{{ scope.row.cid }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="cname" label="Course name" />
+        <el-table-column prop="ccredit" label="Credits" width="120">
+          <template #default="scope">
+            <el-tag size="small" type="primary">{{ scope.row.ccredit }} credits</el-tag>
+          </template>
+        </el-table-column>
+        <template #empty>
+          <el-empty description="You haven't offered any courses this term" :image-size="80">
+            <el-button type="primary" class="press" @click="$router.push('/offerCourse')">
+              Offer a course
+            </el-button>
+          </el-empty>
+        </template>
+      </el-table>
+      <div class="app-pagination">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="total || 0"
+          :page-size="pageSize"
+          @current-change="changePage"
+        />
+      </div>
+    </el-card>
   </div>
 </template>
 
 <script setup>
 import { reactive, toRefs } from 'vue'
+import { Plus } from '@element-plus/icons-vue'
 
 const state = reactive({
   tableData: null,
@@ -47,7 +72,7 @@ axios.get('/courseTeacher/findMyCourse/' + state.tid + '/' + state.term).then(fu
     end = state.pageSize
   let length = state.tmpList.length
   let ans = end < length ? end : length
-  state.tableData = state.tmpList.slice(start, ans)
+  state.tableData = state.tmpList.slice(start, end)
 })
 
 function changePage(page) {
@@ -59,3 +84,16 @@ function changePage(page) {
   state.tableData = state.tmpList.slice(start, ans)
 }
 </script>
+
+<style scoped>
+.app-pagination {
+  padding: 16px 20px;
+  border-top: 1px solid var(--hairline-soft);
+}
+.cell-mono {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--sky-700);
+  font-weight: 500;
+}
+</style>

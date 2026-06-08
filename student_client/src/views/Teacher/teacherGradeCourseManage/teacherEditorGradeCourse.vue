@@ -1,35 +1,56 @@
 <template>
   <div>
-    <el-card>
+    <div class="page-header">
+      <div>
+        <p class="page-header__eyebrow">Teacher · Grades</p>
+        <h1 class="page-header__title">Edit grade</h1>
+        <p class="page-header__subtitle">Adjust the recorded grade for this student.</p>
+      </div>
+      <div class="page-header__actions">
+        <el-button @click="router.back()">
+          <el-icon><ArrowLeft /></el-icon><span>Back</span>
+        </el-button>
+      </div>
+    </div>
+
+    <el-card class="app-panel edit-panel">
       <el-form
         :model="ruleForm"
         :rules="rules"
         ref="ruleFormRef"
-        label-width="100px"
-        class="demo-ruleForm"
+        label-position="top"
+        class="edit-form"
       >
-        <el-form-item label="Course Name" prop="cname">
-          <el-input v-model="ruleForm.cname" :value="ruleForm.cname" :disabled="true"></el-input>
+        <el-form-item label="Course name">
+          <el-input v-model="ruleForm.cname" :value="ruleForm.cname" disabled />
         </el-form-item>
-        <el-form-item label="Teacher Name" prop="tname">
-          <el-input v-model="ruleForm.tname" :value="ruleForm.tname" :disabled="true"></el-input>
+        <el-form-item label="Teacher name">
+          <el-input v-model="ruleForm.tname" :value="ruleForm.tname" disabled />
         </el-form-item>
-        <el-form-item label="Student Name" prop="sname">
-          <el-input v-model="ruleForm.sname" :value="ruleForm.sname" :disabled="true"></el-input>
+        <el-form-item label="Student name">
+          <el-input v-model="ruleForm.sname" :value="ruleForm.sname" disabled />
         </el-form-item>
-        <el-form-item label="Grade" prop="grade">
-          <el-input v-model.number="ruleForm.grade" :value="ruleForm.grade"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm">Submit</el-button>
-          <el-button @click="resetForm">Reset</el-button>
+        <el-form-item label="Grade (0 – 100)" prop="grade">
+          <el-input-number
+            v-model="ruleForm.grade"
+            :value="ruleForm.grade"
+            :min="0"
+            :max="100"
+            style="width: 200px"
+          />
         </el-form-item>
       </el-form>
+      <div class="glass-bar">
+        <el-button text @click="router.back()">Cancel</el-button>
+        <el-button @click="resetForm">Reset</el-button>
+        <el-button type="primary" class="press" @click="submitForm">Save changes</el-button>
+      </div>
     </el-card>
   </div>
 </template>
 <script setup>
 import { getCurrentInstance, reactive, ref } from 'vue'
+import { ArrowLeft } from '@element-plus/icons-vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -38,18 +59,16 @@ const { proxy } = getCurrentInstance()
 const ruleFormRef = ref(null)
 
 const checkGrade = (rule, value, callback) => {
-  if (!value) {
-    return callback(new Error('Grade Management'))
+  if (value === null || value === undefined || value === '') {
+    return callback(new Error('Please enter a grade'))
   }
-  if (!Number.isInteger(value)) {
-    callback(new Error('Please enter a numeric value'))
-  } else {
-    if (value > 100 || value < 0) {
-      callback(new Error('Grade Management [0 - 100]'))
-    } else {
-      callback()
-    }
+  if (!Number.isInteger(Number(value))) {
+    return callback(new Error('Grade must be a number'))
   }
+  if (value > 100 || value < 0) {
+    return callback(new Error('Grade must be between 0 and 100'))
+  }
+  callback()
 }
 
 const ruleForm = reactive({
@@ -65,8 +84,8 @@ const ruleForm = reactive({
 
 const rules = reactive({
   grade: [
-    { required: true, message: 'Please enterCredits', trigger: 'change' },
-    { type: 'number', message: 'Please enter a number', trigger: 'change' },
+    { required: true, message: 'Please enter a grade', trigger: 'change' },
+    { type: 'number', message: 'Grade must be a number', trigger: 'change' },
     { validator: checkGrade, trigger: 'blur' },
   ],
 })
@@ -76,9 +95,7 @@ ruleForm.tid = route.query.tid
 ruleForm.sid = route.query.sid
 ruleForm.term = route.query.term
 axios
-  .get(
-    '/SCT/findById/' + ruleForm.sid + '/' + ruleForm.cid + '/' + ruleForm.tid + '/' + ruleForm.term,
-  )
+  .get('/SCT/findById/' + ruleForm.sid + '/' + ruleForm.cid + '/' + ruleForm.tid + '/' + ruleForm.term)
   .then(function (resp) {
     Object.assign(ruleForm, resp.data)
   })
@@ -86,25 +103,16 @@ axios
 function submitForm() {
   ruleFormRef.value.validate((valid) => {
     if (valid) {
-      // Passed frontend validation
-      const sid = ruleForm.sid
-      const cid = ruleForm.cid
-      const tid = ruleForm.tid
-      const term = ruleForm.term
-      const grade = ruleForm.grade
+      const { sid, cid, tid, term, grade } = ruleForm
       axios
         .get('/SCT/updateById/' + sid + '/' + cid + '/' + tid + '/' + term + '/' + grade)
         .then(function (resp) {
           if (resp.data === true) {
-            proxy.$message({
-              showClose: true,
-              message: 'Edit',
-              type: 'success',
-            })
+            proxy.$message({ message: 'Grade updated', type: 'success' })
           } else {
-            proxy.$message.error('Edit,Management')
+            proxy.$message({ message: 'Update failed. Please contact the administrator.', type: 'error' })
           }
-          router.push('/queryGradeCourse')
+          router.push('/teacherQueryGradeCourseManage')
         })
     } else {
       return false
@@ -116,3 +124,12 @@ function resetForm() {
   ruleFormRef.value.resetFields()
 }
 </script>
+
+<style scoped>
+.edit-panel {
+  padding: 32px;
+}
+.edit-form {
+  max-width: 720px;
+}
+</style>

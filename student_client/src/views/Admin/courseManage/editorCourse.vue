@@ -1,35 +1,54 @@
 <template>
   <div>
-    <el-card class="app-panel">
+    <div class="page-header">
+      <div>
+        <p class="page-header__eyebrow">Admin · Courses</p>
+        <h1 class="page-header__title">Edit course</h1>
+        <p class="page-header__subtitle">Update the course name or credit hours.</p>
+      </div>
+      <div class="page-header__actions">
+        <el-button @click="router.push('/queryCourse')">
+          <el-icon><ArrowLeft /></el-icon><span>Back to catalog</span>
+        </el-button>
+      </div>
+    </div>
+
+    <el-card class="app-panel edit-panel">
       <el-form
         :model="ruleForm"
         :rules="rules"
         ref="ruleFormRef"
-        label-width="150px"
-        class="demo-ruleForm course-edit-form"
+        label-position="top"
+        class="edit-form"
       >
-        <el-form-item label="Course Name" prop="cname">
-          <el-input v-model="ruleForm.cname" :value="ruleForm.cname"></el-input>
+        <el-form-item label="Course name" prop="cname">
+          <el-input v-model="ruleForm.cname" :value="ruleForm.cname" />
         </el-form-item>
         <el-form-item label="Credits" prop="ccredit">
-          <el-input v-model.number="ruleForm.ccredit" :value="ruleForm.ccredit"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm">Submit</el-button>
-          <el-button @click="resetForm">Reset</el-button>
+          <el-input-number
+            v-model="ruleForm.ccredit"
+            :value="ruleForm.ccredit"
+            :min="1"
+            :max="10"
+            style="width: 200px"
+          />
         </el-form-item>
       </el-form>
+      <div class="glass-bar">
+        <el-button text @click="router.push('/queryCourse')">Cancel</el-button>
+        <el-button @click="resetForm">Reset</el-button>
+        <el-button type="primary" class="press" @click="submitForm">Save changes</el-button>
+      </div>
     </el-card>
   </div>
 </template>
 <script setup>
 import { getCurrentInstance, reactive, ref, toRefs } from 'vue'
-
+import { ArrowLeft } from '@element-plus/icons-vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const router = useRouter()
 const route = useRoute()
-
 const { proxy } = getCurrentInstance()
 
 const ruleFormRef = ref(null)
@@ -41,10 +60,10 @@ const state = reactive({
     ccredit: null,
   },
   rules: {
-    cname: [{ required: true, message: 'Please enter a name', trigger: 'blur' }],
+    cname: [{ required: true, message: 'Please enter a course name', trigger: 'blur' }],
     ccredit: [
-      { required: true, message: 'Please enterCredits', trigger: 'change' },
-      { type: 'number', message: 'Please enter a number', trigger: 'change' },
+      { required: true, message: 'Please enter credits', trigger: 'change' },
+      { type: 'number', message: 'Credits must be a number', trigger: 'change' },
     ],
   },
 })
@@ -60,19 +79,14 @@ axios.get('/course/findById/' + state.ruleForm.cid).then(function (resp) {
   Object.assign(state.ruleForm, resp.data[0])
 })
 
-function submitForm(formName) {
+function submitForm() {
   ruleFormRef.value.validate((valid) => {
     if (valid) {
-      // Passed frontend validation
       axios.post('/course/updateCourse', state.ruleForm).then(function (resp) {
         if (resp.data === true) {
-          proxy.$message({
-            showClose: true,
-            message: 'Edit',
-            type: 'success',
-          })
+          proxy.$message({ message: 'Course updated', type: 'success' })
         } else {
-          proxy.$message.error('Edit,Management')
+          proxy.$message({ message: 'Update failed. Please contact the administrator.', type: 'error' })
         }
         router.push('/queryCourse')
       })
@@ -82,13 +96,16 @@ function submitForm(formName) {
   })
 }
 
-function resetForm(formName) {
+function resetForm() {
   ruleFormRef.value.resetFields()
 }
 </script>
 
 <style scoped>
-.course-edit-form :deep(.el-form-item__label) {
-  white-space: nowrap;
+.edit-panel {
+  padding: 32px;
+}
+.edit-form {
+  max-width: 720px;
 }
 </style>
