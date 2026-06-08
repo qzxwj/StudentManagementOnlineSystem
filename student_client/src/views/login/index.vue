@@ -5,11 +5,11 @@
     <div class="login-split">
       <section class="login-feature" aria-hidden="true">
         <div class="login-feature__inner">
-          <p class="login-feature__eyebrow">NUIST · 2025–2026</p>
-          <h1 class="login-feature__heading">Course Management System</h1>
+          <p class="login-feature__eyebrow">NUIST · 2026–2027</p>
+          <h1 class="login-feature__heading">Course Management Online System</h1>
           <p class="login-feature__sub">
             One online system for students to pick courses, teachers to offer them, and
-            administrators to keep things running.
+            administrators to keep things running
           </p>
           <ul class="login-feature__list">
             <li>
@@ -57,7 +57,7 @@
                 </div>
                 <div>
                   <p class="login-title">Welcome back</p>
-                  <p class="login-subtitle">Sign in with your university account to continue.</p>
+                  <p class="login-subtitle">Sign in with personal information to continue</p>
                 </div>
               </div>
             </template>
@@ -108,7 +108,7 @@
             </el-form>
 
             <div class="register-actions">
-              <span>New to NUIST Course?</span>
+              <span>New to NUIST?</span>
               <el-button text @click="goRegister('student')">Student register</el-button>
               <span class="register-actions__sep">·</span>
               <el-button text @click="goRegister('teacher')">Teacher register</el-button>

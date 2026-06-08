@@ -7,7 +7,7 @@
         <div class="register-feature__inner">
           <p class="register-feature__eyebrow">Create your account</p>
           <h1 class="register-feature__heading">
-            {{ pageTitle === 'Teacher Register' ? 'Join the faculty.' : 'Join the classroom.' }}
+            {{ pageTitle === 'Teacher Register' ? 'Join the faculty.' : 'Welcome to NUIST' }}
           </h1>
           <p class="register-feature__sub">
             Set up your account in a minute. You'll get an ID you can use to sign in right away.
@@ -54,7 +54,7 @@
                 <div>
                   <p class="register-title">{{ pageTitle }}</p>
                   <p class="register-subtitle">
-                    Create an account and use the generated ID to sign in.
+                    Create an account, use the generated ID to sign in
                   </p>
                 </div>
               </div>
