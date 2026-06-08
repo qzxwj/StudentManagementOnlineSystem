@@ -6,7 +6,7 @@
         <span class="home-hero__eyebrow">
           <el-icon><Setting /></el-icon>Admin workspace
         </span>
-        <h1 class="home-hero__heading">Welcome back, {{ name }}.</h1>
+        <h1 class="home-hero__heading">Welcome back, {{ name }}</h1>
         <p class="home-hero__subheading">
           Coordinate the {{ term || 'current term' }} course offerings, manage user records, and
           keep the registrar running smoothly — all in one place.

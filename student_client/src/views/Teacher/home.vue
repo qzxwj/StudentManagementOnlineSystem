@@ -6,7 +6,7 @@
         <span class="home-hero__eyebrow">
           <el-icon><Reading /></el-icon>Teacher workspace
         </span>
-        <h1 class="home-hero__heading">Welcome back, {{ name }}.</h1>
+        <h1 class="home-hero__heading">Welcome back, {{ name }}</h1>
         <p class="home-hero__subheading">
           Set up your {{ term || 'current term' }} offerings, track who's enrolled, and submit
           grades when the term closes.

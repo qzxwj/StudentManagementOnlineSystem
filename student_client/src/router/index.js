@@ -176,13 +176,13 @@ const routes = [
         name: 'adminGradeCourseManage',
         path: '/gradeCourseManage',
         component: studentManage,
-        meta: { requireAuth: true, title: 'admin StudentGrade Management' },
+        meta: { requireAuth: true, title: 'Grade Management' },
         children: [
           {
             path: '/queryGradeCourse',
             name: 'adminQueryGradeCourse',
             component: queryGradeCourse,
-            meta: { requireAuth: true, title: 'StudentGradeSearch' },
+            meta: { requireAuth: true, title: 'GradeSearch' },
           },
           {
             path: '/editorGradeCourse',
@@ -294,7 +294,7 @@ const routes = [
             path: '/updateInfoHome',
             name: 'studentUpdateInfoHome',
             component: updateInfo,
-            meta: { requireAuth: true, title: 'EditStudent Management' },
+            meta: { requireAuth: true, title: 'Edit Student' },
           },
         ],
       },
@@ -324,13 +324,13 @@ const routes = [
         name: 'studentCourseGrade',
         redirect: '/queryCourseGrade',
         component: studentCourseGrade,
-        meta: { requireAuth: true, title: 'StudentGrade Management' },
+        meta: { requireAuth: true, title: 'Grade Management' },
         children: [
           {
             path: '/queryCourseGrade',
             name: 'studentQueryCourseGrade',
             component: queryCourseGrade,
-            meta: { requireAuth: true, title: 'GradeSearch' },
+            meta: { requireAuth: true, title: 'Grade Search' },
           },
         ],
       },
