@@ -3,18 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.studentmanagementonlinesystem.mapper.StudentCourseTeacherMapper">
-    <select id="findByStudentId" resultType="CourseTeacherInfo">
-        SELECT c.cid, c.cname, t.tid, t.tname, sct.grade, c.ccredit
-        FROM studentms.sct sct INNER JOIN studentms.t t ON sct.tid = t.tid
-                INNER JOIN studentms.c c ON sct.cid = c.cid
-        WHERE sct.sid = #{sid} AND sct.term = #{term}
-    </select>
-
     <select id="findBySearch" resultType="StudentCourseTeacherInfo">
         SELECT c.cid, c.cname, t.tid, t.tname, s.sid, s.sname, sct.grade, sct.term
-        FROM studentms.sct sct INNER JOIN studentms.s s ON sct.sid = s.sid
-                INNER JOIN studentms.t t ON sct.tid = t.tid
-                INNER JOIN studentms.c c ON sct.cid = c.cid
+        FROM sct sct INNER JOIN s s ON sct.sid = s.sid
+                INNER JOIN t t ON sct.tid = t.tid
+                INNER JOIN c c ON sct.cid = c.cid
         <where>
             <if test="sid != null">
                 s.sid = #{sid}

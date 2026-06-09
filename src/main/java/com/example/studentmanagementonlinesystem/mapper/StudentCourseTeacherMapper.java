@@ -9,6 +9,12 @@ import java.util.List;
 
 @Mapper
 public interface StudentCourseTeacherMapper {
+    @Select("""
+            SELECT c.cid, c.cname, t.tid, t.tname, sct.grade, c.ccredit
+            FROM sct sct INNER JOIN t t ON sct.tid = t.tid
+                    INNER JOIN c c ON sct.cid = c.cid
+            WHERE sct.sid = #{sid} AND sct.term = #{term}
+            """)
     public List<CourseTeacherInfo> findByStudentId(@Param("sid") Integer sid,
                                                    @Param("term") String term);
 
@@ -25,31 +31,31 @@ public interface StudentCourseTeacherMapper {
                                                        @Param("highBound") Integer highBound,
                                                        @Param("term") String term);
 
-    @Select("SELECT DISTINCT sct.term FROM studentms.sct sct")
+    @Select("SELECT DISTINCT sct.term FROM sct sct")
     public List<String> findAllTerm();
 
-    @Select("SELECT * FROM studentms.sct WHERE sid = #{sct.sid} AND cid = #{sct.cid} AND tid = #{sct.tid} AND term = #{sct.term}")
+    @Select("SELECT * FROM sct WHERE sid = #{sct.sid} AND cid = #{sct.cid} AND tid = #{sct.tid} AND term = #{sct.term}")
     public List<StudentCourseTeacher> findBySCT(@Param("sct") StudentCourseTeacher studentCourseTeacher);
 
-    @Insert("INSERT INTO studentms.sct (sid, cid, tid, term) VALUES (#{s.sid}, #{s.cid}, #{s.tid}, #{s.term})")
+    @Insert("INSERT INTO sct (sid, cid, tid, term) VALUES (#{s.sid}, #{s.cid}, #{s.tid}, #{s.term})")
     public boolean insert(@Param("s")StudentCourseTeacher studentCourseTeacher);
 
-    @Update("UPDATE studentms.sct SET sct.grade = #{grade} WHERE sct.sid = #{sid} AND sct.tid = #{tid} AND sct.cid = #{cid} AND sct.term = #{term}")
+    @Update("UPDATE sct SET sct.grade = #{grade} WHERE sct.sid = #{sid} AND sct.tid = #{tid} AND sct.cid = #{cid} AND sct.term = #{term}")
     public boolean updateById(@Param("sid") Integer sid,
                               @Param("cid") Integer cid,
                               @Param("tid") Integer tid,
                               @Param("term") String term,
                               @Param("grade") Integer grade);
 
-    @Delete("DELETE FROM studentms.sct WHERE sid = #{sct.sid} AND tid = #{sct.tid} AND cid = #{sct.cid}")
+    @Delete("DELETE FROM sct WHERE sid = #{sct.sid} AND tid = #{sct.tid} AND cid = #{sct.cid}")
     public boolean deleteBySCT(@Param("sct") StudentCourseTeacher sct);
 
-    @Delete("DELETE FROM studentms.sct WHERE sid = #{sid}")
+    @Delete("DELETE FROM sct WHERE sid = #{sid}")
     public int deleteBySid(@Param("sid") Integer sid);
 
-    @Delete("DELETE FROM studentms.sct WHERE tid = #{tid}")
+    @Delete("DELETE FROM sct WHERE tid = #{tid}")
     public int deleteByTid(@Param("tid") Integer tid);
 
-    @Delete("DELETE FROM studentms.sct WHERE cid = #{cid}")
+    @Delete("DELETE FROM sct WHERE cid = #{cid}")
     public int deleteByCid(@Param("cid") Integer cid);
 }

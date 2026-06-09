@@ -30,11 +30,6 @@
         </where>
     </select>
 
-    <insert id="insertCourse">
-        insert into c (cid, cname, ccredit)
-        values (#{course.cid}, #{course.cname}, #{course.ccredit})
-    </insert>
-
     <update id="updateById">
         update c
         <set>
@@ -48,8 +43,4 @@
         where cid = #{course.cid}
     </update>
 
-    <delete id="deleteById">
-        delete from c
-        where cid = #{cid}
-    </delete>
 </mapper>

@@ -33,6 +33,7 @@
         <el-form-item label="Fuzzy (teacher)">
           <el-switch v-model="ruleForm.tFuzzy" />
         </el-form-item>
+        <div class="query-form__break" aria-hidden="true"></div>
         <el-form-item label="Course ID" prop="cid">
           <el-input v-model.number="ruleForm.cid" placeholder="Course ID" clearable />
         </el-form-item>

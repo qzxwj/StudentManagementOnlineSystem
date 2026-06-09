@@ -4,17 +4,6 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.studentmanagementonlinesystem.mapper.StudentMapper">
-    <select id="findAll" resultType="Student">
-        select sid, sname, password
-        from s
-    </select>
-
-    <select id="findById" resultType="Student">
-        select sid, sname, password
-        from s
-        where sid = #{sid}
-    </select>
-
     <update id="updateById">
         update s
         <set>
@@ -28,13 +17,4 @@
         where sid = #{student.sid}
     </update>
 
-    <insert id="register" useGeneratedKeys="true" keyProperty="student.sid">
-        insert into s (sname, password)
-        values (#{student.sname}, #{student.password})
-    </insert>
-
-    <delete id="deleteById">
-        delete from s
-        where sid = #{sid}
-    </delete>
 </mapper>
