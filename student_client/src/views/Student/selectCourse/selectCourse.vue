@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <p class="page-header__eyebrow">Student · Courses</p>
-        <h1 class="page-header__title">Browse courses</h1>
+        <h1 class="page-header__title">Browse Courses</h1>
         <p class="page-header__subtitle">Find courses to add to your schedule this term.</p>
       </div>
       <div class="page-header__actions">

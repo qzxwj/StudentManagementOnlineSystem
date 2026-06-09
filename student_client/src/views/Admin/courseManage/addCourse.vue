@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <p class="page-header__eyebrow">Admin · Courses</p>
-        <h1 class="page-header__title">Add a new course</h1>
+        <h1 class="page-header__title">Add a New Course</h1>
         <p class="page-header__subtitle">Create a new course in the catalog.</p>
       </div>
       <div class="page-header__actions">

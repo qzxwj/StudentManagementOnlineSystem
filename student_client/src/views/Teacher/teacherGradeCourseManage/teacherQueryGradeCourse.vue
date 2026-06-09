@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <p class="page-header__eyebrow">Teacher · Grades</p>
-        <h1 class="page-header__title">Search grades</h1>
+        <h1 class="page-header__title">Search Grades</h1>
         <p class="page-header__subtitle">Find grades for students in your offerings.</p>
       </div>
       <div class="page-header__actions">
@@ -39,6 +39,7 @@
         <el-form-item label="Fuzzy (course)">
           <el-switch v-model="ruleForm.cFuzzy" />
         </el-form-item>
+        <div class="query-form__break" aria-hidden="true"></div>
         <el-form-item label="Min grade" prop="lowBound">
           <el-input-number v-model="ruleForm.lowBound" :min="0" :max="100" />
         </el-form-item>
@@ -46,7 +47,7 @@
           <el-input-number v-model="ruleForm.highBound" :min="0" :max="100" />
         </el-form-item>
         <el-form-item label="Term">
-          <el-select v-model="ruleForm.term" placeholder="All terms" clearable>
+          <el-select v-model="ruleForm.term" placeholder="All terms" clearable style="width: 180px">
             <el-option
               v-for="(item, index) in termList"
               :key="index"

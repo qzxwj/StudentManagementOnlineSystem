@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <p class="page-header__eyebrow">Admin · Students</p>
-        <h1 class="page-header__title">Edit student</h1>
+        <h1 class="page-header__title">Edit Student</h1>
         <p class="page-header__subtitle">Update the student's name or reset their password.</p>
       </div>
     </div>

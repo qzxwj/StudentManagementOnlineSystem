@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <p class="page-header__eyebrow">Profile</p>
-        <h1 class="page-header__title">Account settings</h1>
+        <h1 class="page-header__title">Account Settings</h1>
         <p class="page-header__subtitle">Update your display name and password.</p>
       </div>
     </div>

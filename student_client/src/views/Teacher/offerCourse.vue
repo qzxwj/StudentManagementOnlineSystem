@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <p class="page-header__eyebrow">Teacher · Courses</p>
-        <h1 class="page-header__title">Offer a course</h1>
+        <h1 class="page-header__title">Offer a Course</h1>
         <p class="page-header__subtitle">Search the catalog and offer a course for the current term.</p>
       </div>
       <div class="page-header__actions">
@@ -33,6 +33,7 @@
         <el-form-item label="Fuzzy match" prop="fuzzy">
           <el-switch v-model="ruleForm.fuzzy" />
         </el-form-item>
+        <div class="query-form__break" aria-hidden="true"></div>
         <el-form-item label="Min credits" prop="lowBound">
           <el-input-number v-model="ruleForm.lowBound" :min="0" :max="10" />
         </el-form-item>

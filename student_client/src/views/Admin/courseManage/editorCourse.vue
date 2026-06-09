@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <p class="page-header__eyebrow">Admin · Courses</p>
-        <h1 class="page-header__title">Edit course</h1>
+        <h1 class="page-header__title">Edit Course</h1>
         <p class="page-header__subtitle">Update the course name or credit hours.</p>
       </div>
       <div class="page-header__actions">

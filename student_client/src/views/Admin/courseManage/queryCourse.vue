@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <p class="page-header__eyebrow">Admin · Courses</p>
-        <h1 class="page-header__title">Course catalog</h1>
+        <h1 class="page-header__title">Course Catalog</h1>
         <p class="page-header__subtitle">Search, filter, and edit every course in the curriculum.</p>
       </div>
       <div class="page-header__actions">

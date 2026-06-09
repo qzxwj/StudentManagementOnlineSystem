@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <p class="page-header__eyebrow">Admin · Offerings</p>
-        <h1 class="page-header__title">Course offerings</h1>
+        <h1 class="page-header__title">Course Offerings</h1>
         <p class="page-header__subtitle">Match courses to the teachers who teach them this term.</p>
       </div>
       <div class="page-header__actions">

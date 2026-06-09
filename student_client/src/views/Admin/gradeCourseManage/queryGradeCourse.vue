@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <p class="page-header__eyebrow">Admin · Grades</p>
-        <h1 class="page-header__title">Search grades</h1>
+        <h1 class="page-header__title">Search Grades</h1>
         <p class="page-header__subtitle">Filter by student, teacher, course, term, or grade range.</p>
       </div>
       <div class="page-header__actions">

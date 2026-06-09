@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <p class="page-header__eyebrow">Admin · Teachers</p>
-        <h1 class="page-header__title">Find teachers</h1>
+        <h1 class="page-header__title">Find Teachers</h1>
         <p class="page-header__subtitle">Search by ID or name. Toggle fuzzy match for partial lookups.</p>
       </div>
       <div class="page-header__actions">

@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <p class="page-header__eyebrow">Student · Grades</p>
-        <h1 class="page-header__title">My grades</h1>
+        <h1 class="page-header__title">My Grades</h1>
         <p class="page-header__subtitle">Term-by-term grade history.</p>
       </div>
     </div>

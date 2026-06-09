@@ -3,7 +3,7 @@
     <div class="page-header">
       <div>
         <p class="page-header__eyebrow">Teacher · Courses</p>
-        <h1 class="page-header__title">My offerings</h1>
+        <h1 class="page-header__title">My Offerings</h1>
         <p class="page-header__subtitle">Courses you're teaching for the {{ term || 'current' }} term.</p>
       </div>
       <div class="page-header__actions">
